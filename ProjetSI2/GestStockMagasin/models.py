@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 
+
+#Models de la section Tables
 class TypeProduit (models.Model):
     CodeT = models.CharField(primary_key=True ,max_length=10)
     DesignationT = models.CharField(max_length=100)
@@ -28,3 +30,6 @@ class Fournisseur(models.Model):
     PrenomF = models.CharField
     AdresseF = models.CharField
     TelephoneF = models.CharField
+
+
+    #Models de la section Achat
