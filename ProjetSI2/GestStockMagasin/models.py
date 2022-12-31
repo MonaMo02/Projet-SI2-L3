@@ -7,7 +7,13 @@ from django.db import models
 class TypeProduit (models.Model):
     CodeT = models.CharField(primary_key=True ,max_length=10)
     DesignationT = models.CharField(max_length=100)
-
+    
+class Fournisseur(models.Model):
+    CodeF = models.CharField(primary_key=True, max_length=10)
+    NomF = models.CharField
+    PrenomF = models.CharField
+    AdresseF = models.CharField
+    TelephoneF = models.CharField
 
 class Produit (models.Model):
     CodeP = models.CharField(primary_key=True, max_length=10)
@@ -24,12 +30,7 @@ class Client (models.Model):
     TelephoneC = models.CharField
     Acheter = models.ManyToManyField(Produit, related_name="Client")
 
-class Fournisseur(models.Model):
-    CodeF = models.CharField(primary_key=True, max_length=10)
-    NomF = models.CharField
-    PrenomF = models.CharField
-    AdresseF = models.CharField
-    TelephoneF = models.CharField
+
 
 
     #Models de la section Achat
