@@ -20,13 +20,13 @@ class Produit (models.Model):
     Type = models.ForeignKey(TypeProduit, on_delete=models.CASCADE)
 
 class Client (models.Model):
-    CodeC = models.CharField(primary_key= True, max_length=10)
-    NomC = models.CharField
-    PrenomC = models.CharField
-    AdresseC = models.CharField
-    TelephoneC = models.CharField
+    CodeC = models.AutoField(primary_key= True)
+    NomC = models.CharField(max_length=100,default="...")
+    PrenomC = models.CharField(max_length=100,default="...")
+    AdresseC = models.CharField(max_length=100,default="...")
+    TelephoneC = models.CharField(max_length=100,default="...")
     def __str__(self):         
-        return str(self.CodeC,self.NomC,self.PrenomC,self.AdresseC,self.TelephoneC) 
+        return str(self.NomC)
 
 
 

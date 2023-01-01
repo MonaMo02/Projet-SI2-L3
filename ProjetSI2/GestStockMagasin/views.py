@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import TypeProduit, Produit, Fournisseur, Client
 from .forms import ProduitForm, FournisseurForm, ClientForm,TypeForm
+from django.contrib import messages
 #View de dashboard
 
 
@@ -40,15 +41,15 @@ def afficher_Client(request):
         form = ClientForm(request.POST)
         if form.is_valid():
             form.save()
-            form = ClientForm()
-            message = "Client inseré"
-            return redirect("dashboard-client",{"message":message})
+            C_name = form.cleaned_data.get('NomC')
+            messages.success(request, f'{C_name} has been added')
+            return redirect("dashboard-client")
     else:
         form = ClientForm()
     context = {
         'Clients': Clients,
         'form': form,
-    }
+    } 
     return render(request, 'Clients.html', context)
 
 
