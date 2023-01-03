@@ -11,17 +11,27 @@
     <h1>La liste des client disponibles:</h1>
     <table border="1px">
       <thead></thead>
-      {% for C in Clients %}
+      
       <tbody>
+        <tr>
+          <td>Code</td>
+          <td>Nom</td>
+          <td>Prenom</td>
+          <td>Adresse</td>
+          <td>Telephone</td>
+          <td>Edit</td>
+          <td>Delete</td>
+        </tr>
+        {% for C in Clients %}
         <tr>
           <td>{{ C.CodeC }}</td>
           <td>{{ C.NomC }}</td>
-          <td>
-            <a>Edit</a>
-          </td>
-          <td>
-            <a>Delete</a>
-          </td>
+          <td>{{ C.PrenomC }}</td>
+          <td>{{ C.AdresseC }}</td>
+          <td>{{ C.TelephoneC }}</td>
+          <td><a href="{% url 'edit-client' C.CodeC %}">Edit</a></td>
+
+          <td><a href="{% url 'delete-client' C.CodeC %}">Delete</a></td>
         </tr>
         {% endfor %}
       </tbody>
