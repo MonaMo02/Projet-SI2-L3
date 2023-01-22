@@ -11,25 +11,25 @@ from django.contrib.auth.models import User
 
 #login and register views
 
-def register(request):
-    form = UserForm()
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-    return render(request, "users/register.html", {'form': form})
+# def register(request):
+#     form = UserForm()
+#     if request.method == 'POST':
+#         form = UserForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#     return render(request, "users/register.html", {'form': form})
 
-def login(request):
-    if request.method == 'POST':
-        name = request.POST.get('uname')
-        password = request.POST.get('pass')
-        user = authenticate(request, username=name, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('main-dashboard')
-        else:
-            return HttpResponse('Error, user does not exist')
-    return render(request, 'users/login.html', {})
+# def login(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('uname')
+#         password = request.POST.get('pass')
+#         user = authenticate(request, username=name, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('main-dashboard')
+#         else:
+#             return HttpResponse('Error, user does not exist')
+#     return render(request, 'users/login.html', {})
 
 #Vente views
 
@@ -48,13 +48,6 @@ def afficher_Vente(request):
     client_count = Clients.count()
     stock = Stock.objects.all()
     stock_count = stock.count()
-    # if request.method == 'GET':
-    #     query = request.GET.get('recherche')
-    #     if query :
-    #         clients = Clients.objects.filter(name__contains = query)
-    #         return render(request, "dashboard/vente.html", {'clients':clients})
-    # else:
-    #     return render(request, 'dashboard/vente.html')
     if request.method == 'POST':
         form = VentCForm(request.POST)
         if form.is_valid():
@@ -115,6 +108,8 @@ def afficher_Stock(request):
     client_count = Clients.count()
     stock = Stock.objects.all()
     stock_count = stock.count()
+    item = VenteComptoir.objects.all()
+    vente_count = item.count()
     if request.method == 'POST':
         form = StockForm(request.POST)
         if form.is_valid():
@@ -131,6 +126,7 @@ def afficher_Stock(request):
         'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
+        'V_count':vente_count,
     }
     return render(request, 'dashboard/stock.html', contexte)
 
@@ -164,7 +160,6 @@ def deletestock(request,pk):
 
 
 #View de dashboard
-@login_required(login_url='login')
 def dashboard(request):
     item = VenteComptoir.objects.all()
     vente_count = item.count()
@@ -191,7 +186,6 @@ def dashboard(request):
     }
     return render(request,"dashboard/dashboard.html", context)
 
-@login_required(login_url='login/')
 def afficher_Types(request):
     prods = Produit.objects.all()
     prod_count = prods.count()
@@ -232,7 +226,6 @@ def afficher_Types(request):
 
     ########################################################################
 
-@login_required(login_url='dash-login')
 def afficher_Fournisseur(request):
     prods = Produit.objects.all()
     prod_count = prods.count()
@@ -274,7 +267,6 @@ def afficher_Fournisseur(request):
 
 ########################################################################
 
-@login_required(login_url='login/')
 def afficher_Produits(request):
     Prods = Produit.objects.all()
     prod_count = Prods.count()
@@ -313,7 +305,6 @@ def afficher_Produits(request):
 
 ######################################################################
 
-@login_required(login_url='dash-login')
 def afficher_Client(request):
     prods = Produit.objects.all()
     prod_count = prods.count()
@@ -358,7 +349,6 @@ def afficher_Client(request):
 
 #Les views des suppressions: 
 
-@login_required(login_url='login')
 def product_delete(request,pk):
     item = Produit.objects.get(CodeP=pk)
     if request.method == 'POST':
@@ -447,93 +437,4 @@ def fournisseur_edit(request, pk):
     else: 
             form = FournisseurForm(instance= item)
             return render(request, 'dashboard/edit_fournisseur.html', {"form": form})
-
-
-
-# def create_BDC(request):
-#     item = UneCommande.objects.all()
-#     if request.method == 'POST':
-#         form = List_CMD_Form(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("dashboard-BDC")
-#     else:
-#         form = List_CMD_Form()
-
-#     contexte = {
-#         'List':item,
-#         'form' : form,
-#     }
-#     return render(request, "dashboard/create_BDC.html",contexte)
-    
-
-
-
-
-# def save_BDC(request):
-#     buf = io.BytesIO()
-#     c = canvas.Canvas(buf, pagesize = letter, buttomup =0 )
-#     textOb = c.beginText()
-#     textOb.setTextOrigin(inch , inch)
-#     textOb.setFont("Helvatica", 14)
-#     ListP = UneCommande.objects.all()
-#     Lines = []
-#     for u in ListP: 
-#         Lines.append(u.product)
-#         Lines.append(u.QTE)
-#         Lines.append(" ")
-#     for line in Lines:
-#         textOb.textLine(line)
-#     c.drawText(textOb)
-#     c.showPage()
-#     c.save()
-#     buf.seek(0)
-#     return FileResponse(buf, as_attachment=True, filename="BonDeCommande.pdf")
-
-
-
-# def save_BDC(request):
-#     item = UneCommande.objects.all()
-#     return render(request,"dashboard/saved_BDC.html", {"List":item})
-
-
-# def new_BDC(request):
-#     item = UneCommande.objects.all()
-#     item.delete()    
-#     create_BDC(request)
-#     return redirect(request, "dashboard/create_BDC.html")
-
-
-
-# def rechercher_produits(request):  
-#     if request.method =="GET": 
-#         query=request.GET.get('recherche')   
-#         if query: 
-#             produits=Produit.objects.filter(name__contains = query)
-#             return render(request, "search.html",{"products":produits})
-#         else:
-#             return render(request, "search.html")
-        
-
-# def create_facture(request):
-#     item = Facture.objects.all()
-#     if request.method == 'POST':
-#         form = FactureForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             c = form.cleaned_data.get('commande')
-#             p = c.get('product')
-#             q = c.get('QTE')
-#             prix = form.cleaned_data.get('Mont_HT')
-#             pu = form.cleaned_data.get('Prix_unit')
-#             prix = q * pu
-#             return redirect("dashboard-BDC", {"produit":p, "Montant":prix, "QTE":q })
-#     else:
-#         form = FactureForm()
-
-#     contexte = {
-#         'facture':item,
-#         'form' : form,
-#     }
-#     return render(request, "create_BDC.html",contexte)
 
