@@ -14,7 +14,8 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body style="background-color: #151515">
+    <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-info bg-info">
       <div class="container">
         <a class="navbar-brand text-white" href="{% url 'main-dashboard' %}"
@@ -52,38 +53,14 @@
       </div>
     </nav>
 
-    <!-- <div class="parent">
-      <div class="form">
-        <h1>Login Page</h1>
-
-        <form action="" method="POST">
-          {% csrf_token %}
-          <label for="fname">UuserName:</label>
-          <input
-            type="text"
-            placeholder="Enter your username"
-            name="uname"
-          /><br />
-
-          <label for="fname">Password:</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            name="pass"
-          /><br />
-
-          <button type="submit">Submit</button>
-          <p>
-            dont have an account?
-            <a href="{% url 'dash-register' %}">Register</a>
-          </p>
-        </form>
-      </div>
-    </div> -->
+    <!-- end nav bar -->
 
     <div class="row my-4">
       <div class="col-md-4 offset-md-4">
-        <div class="border p-3 bg-white">
+        <div
+          class="border p-3"
+          style="border-radius: 10px; background-color: #aaaaaa"
+        >
           <h4>Login Page</h4>
           <hr />
           <form action="" method="POST">
