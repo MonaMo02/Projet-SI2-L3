@@ -61,7 +61,7 @@
           class="border p-3"
           style="border-radius: 10px; background-color: #aaaaaa"
         >
-          <h4>Are you sure you want to delete this supplier?</h4>
+          <h4>Are you sure you want to delete this product type?</h4>
           <hr />
           <form action="" method="POST">
             {% csrf_token %}
@@ -74,7 +74,7 @@
             <a
               style="margin-left: 50px"
               class="btn btn-success"
-              href="{% url 'dashboard-Fournisseur' %}"
+              href="{% url 'dashboard-types' %}"
               >Cancel</a
             >
             <input

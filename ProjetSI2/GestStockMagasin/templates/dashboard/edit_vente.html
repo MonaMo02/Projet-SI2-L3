@@ -55,50 +55,55 @@
 
     <!-- end nav bar -->
 
-    <!-- <form action="" method="POST">
-        <h3>Are you sure you want to delete this?</h3>
-
-        {% csrf_token %}
-        {{ form }}
-
-        <a  href="{% url 'dashboard-produits' %}">Cancel</a>
-        <input  type="submit" value="Confirm">
-    </form> -->
-
     <div class="row my-4">
       <div class="col-md-4 offset-md-4">
         <div
           class="border p-3"
           style="border-radius: 10px; background-color: #aaaaaa"
         >
-          <h4>Are you sure you want to delete this supplier?</h4>
+          <h4>Edit sale entry</h4>
           <hr />
           <form action="" method="POST">
             {% csrf_token %}
 
             <div>
-              <label class="col-md-3 form-group" for="inputAddress"
-                >Product</label
+              <label class="col-md-4 form-group" for="inputAddress"
+                >Client</label
               >
-              {{ form.DesignationP }}
+              {{ form.Client }}
             </div>
 
             <div>
-              <label class="col-md-3 form-group" for="fname">Type</label>
-              {{ form.Type }}
+              <label class="col-md-4 form-group" for="fname">Product</label>
+              {{ form.Produit }}
+            </div>
+
+            <div>
+              <label class="col-md-4 form-group" for="fname">QTE</label>
+              {{ form.Qte }}
+            </div>
+
+            <div>
+              <label class="col-md-4 form-group" for="fname">PrixVente</label>
+              {{ form.PrixVente }}
+            </div>
+
+            <div>
+              <label class="col-md-4 form-group" for="fname">MontantPaye</label>
+              {{ form.MontantPaye }}
             </div>
 
             <a
               style="margin-left: 50px"
               class="btn btn-success"
-              href="{% url 'dashboard-produits' %}"
+              href="{% url 'dashboard-vente' %}"
               >Cancel</a
             >
             <input
               style="margin-left: 130px"
               class="btn btn-success"
               type="submit"
-              value="Delete"
+              value="Edit"
             />
           </form>
         </div>

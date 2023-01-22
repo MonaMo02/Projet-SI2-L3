@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import TypeProduit, Stock, Produit, Fournisseur, Client
-from .forms import ProduitForm, FournisseurForm,StockForm,UserForm ,ClientForm,TypeForm
+from .models import TypeProduit,VenteComptoir, Stock, Produit, Fournisseur, Client
+from .forms import ProduitForm, VentCForm, FournisseurForm,StockForm,UserForm ,ClientForm,TypeForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
@@ -30,6 +30,75 @@ def login(request):
         else:
             return HttpResponse('Error, user does not exist')
     return render(request, 'users/login.html', {})
+
+#Vente views
+
+def afficher_Vente(request):
+    item = VenteComptoir.objects.all()
+    vente_count = item.count()
+    prods = Produit.objects.all()
+    prod_count = prods.count()
+    fours = Fournisseur.objects.all()
+    fours_count = fours.count()
+    types = TypeProduit.objects.all()
+    type_count = types.count()
+    users = User.objects.all()
+    user_count = users.count()
+    Clients = Client.objects.all()
+    client_count = Clients.count()
+    stock = Stock.objects.all()
+    stock_count = stock.count()
+    # if request.method == 'GET':
+    #     query = request.GET.get('recherche')
+    #     if query :
+    #         clients = Clients.objects.filter(name__contains = query)
+    #         return render(request, "dashboard/vente.html", {'clients':clients})
+    # else:
+    #     return render(request, 'dashboard/vente.html')
+    if request.method == 'POST':
+        form = VentCForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard-vente')
+    else:
+        form = VentCForm()
+    contexte = {
+        'ventes':item,
+        'form' : form,
+        'P_count':prod_count,
+        'F_count':fours_count,
+        'C_count':client_count,
+        'U_count': user_count,
+        'T_count':type_count,
+        'S_count':stock_count,
+        'V_count':vente_count,
+    }
+    return render(request, 'dashboard/vente.html', contexte)
+
+def editvente(request, pk):
+    item = VenteComptoir.objects.get(CodeVente=pk)
+    if request.method == 'POST':
+        form = VentCForm(request.POST, instance = item)
+        if form.is_valid():
+            form.save()
+            return redirect("dashboard-vente")
+    else: 
+            form = VentCForm(instance= item)
+            return render(request, 'dashboard/edit_vente.html', {"form": form})
+
+
+
+def deletevente(request,pk):
+    item = VenteComptoir.objects.get(CodeVente=pk)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('dashboard-vente')
+    else:
+        form = VentCForm(instance=item)
+        return render(request,'dashboard/delete_vente.html',{"form":form})
+
+
+#end vente views
 
 #stock views
 
@@ -97,6 +166,8 @@ def deletestock(request,pk):
 #View de dashboard
 @login_required(login_url='login')
 def dashboard(request):
+    item = VenteComptoir.objects.all()
+    vente_count = item.count()
     prods = Produit.objects.all()
     prod_count = prods.count()
     fours = Fournisseur.objects.all()
@@ -116,6 +187,7 @@ def dashboard(request):
         'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
+        'V_count':vente_count,
     }
     return render(request,"dashboard/dashboard.html", context)
 
@@ -123,6 +195,8 @@ def dashboard(request):
 def afficher_Types(request):
     prods = Produit.objects.all()
     prod_count = prods.count()
+    item = VenteComptoir.objects.all()
+    vente_count = item.count()
     fours = Fournisseur.objects.all()
     fours_count = fours.count()
     types = TypeProduit.objects.all()
@@ -152,6 +226,7 @@ def afficher_Types(request):
         'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
+        'V_count':vente_count,
     }
     return render(request, "dashboard/Types.html", contexte)
 
@@ -161,6 +236,8 @@ def afficher_Types(request):
 def afficher_Fournisseur(request):
     prods = Produit.objects.all()
     prod_count = prods.count()
+    item = VenteComptoir.objects.all()
+    vente_count = item.count()
     fours = Fournisseur.objects.all()
     fours_count = fours.count()
     types = TypeProduit.objects.all()
@@ -189,6 +266,7 @@ def afficher_Fournisseur(request):
         'F_count':fours_count,
         'C_count':client_count,
         'U_count': user_count,
+        'V_count':vente_count,
         'T_count':type_count,
         'S_count':stock_count,
     }
@@ -200,6 +278,8 @@ def afficher_Fournisseur(request):
 def afficher_Produits(request):
     Prods = Produit.objects.all()
     prod_count = Prods.count()
+    item = VenteComptoir.objects.all()
+    vente_count = item.count()
     fours = Fournisseur.objects.all()
     fours_count = fours.count()
     types = TypeProduit.objects.all()
@@ -225,6 +305,7 @@ def afficher_Produits(request):
         'F_count':fours_count,
         'C_count':client_count,
         'U_count': user_count,
+        'V_count':vente_count,
         'T_count':type_count,
         'S_count':stock_count,
     }
@@ -240,6 +321,8 @@ def afficher_Client(request):
     fours_count = fours.count()
     types = TypeProduit.objects.all()
     type_count = types.count()
+    item = VenteComptoir.objects.all()
+    vente_count = item.count()
     users = User.objects.all()
     user_count = users.count()
     #Pour l'affichage des clients
@@ -263,6 +346,7 @@ def afficher_Client(request):
         'form': form,
         'P_count':prod_count,
         'F_count':fours_count,
+        'V_count':vente_count,
         'C_count':client_count,
         'U_count': user_count,
         'T_count':type_count,

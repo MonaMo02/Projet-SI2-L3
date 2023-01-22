@@ -46,6 +46,8 @@ class Stock (models.Model):
     qte = models.IntegerField(default=0)
     PrixHT = models.IntegerField(default=0)
     PrixVente = models.IntegerField(default=0)
+    def __str__(self):         
+        return str(self.PrixVente)
     @property
     def TotalAchat(self):
         TotalAchat = 0 
@@ -58,3 +60,29 @@ class Stock (models.Model):
         if self.qte != 0:
             TotalVente = self.PrixVente * self.qte
         return TotalVente
+
+
+
+#vente 
+
+class VenteComptoir(models.Model):
+    CodeVente = models.IntegerField(default=0, primary_key=True)
+    Client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    Produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
+    Qte = models.IntegerField(default=0)
+    PrixVente = models.FloatField(default= 0)
+    MontantPaye = models.FloatField(default=0)
+    @property
+    def Montant(self):
+        Montant = 0
+        if self.Qte != 0 :
+            Montant = self.Qte * self.PrixVente
+            return Montant
+    @property
+    def Credit(self):
+        Credit = 0
+        Montant = (self.Qte * self.PrixVente)
+        if self.MontantPaye < Montant :
+            Credit = Montant - self.MontantPaye
+            return Credit
+
