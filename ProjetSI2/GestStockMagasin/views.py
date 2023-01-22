@@ -31,7 +31,6 @@ def login(request):
             return HttpResponse('Error, user does not exist')
     return render(request, 'users/login.html', {})
 
-
 #stock views
 
 def afficher_Stock(request):
