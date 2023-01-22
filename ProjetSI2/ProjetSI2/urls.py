@@ -20,5 +20,5 @@ from GestStockMagasin import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('GestStockMagasin.urls')),
-    path('', views.dashboard),
+    path('', views.dashboard,name="main-dashboard"),
 ]

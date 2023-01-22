@@ -1,6 +1,15 @@
 from django.db.models import fields   
 from django import forms  
-from .models import Produit, Fournisseur, Client, TypeProduit
+from .models import Produit, Fournisseur,Stock, Client, TypeProduit
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class UserForm(UserCreationForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
 
 class ProduitForm(forms.ModelForm):
     class Meta:
@@ -28,11 +37,7 @@ class TypeForm(forms.ModelForm):
 
 
 
-
-
-
-
-
-
-
-
+class StockForm(forms.ModelForm):
+    class Meta:
+        model = Stock
+        fields = ['Produit', 'Type', 'qte', 'PrixHT', 'PrixVente']

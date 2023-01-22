@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <title>Dashboard</title>
+  </head>
+
+  <body style="background-color: #151515">
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-info bg-info">
+      <div class="container">
+        <a class="navbar-brand text-white" href="{% url 'main-dashboard' %}"
+          >Home Page</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-white" href="{% url 'main-dashboard' %}"
+                >Dashboard <span class="sr-only">(current)</span></a
+              >
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-white" href="{% url 'dash-login' %}"
+                >Sign in/Sign Up<span class="sr-only">(current)</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- end nav bar -->
+
+    <!--Topside-->
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="card bg-dark">
+            <div class="card-header text-white bg-info">Statistics</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-2">
+                  <a
+                    class="text-decoration-none text-white"
+                    href="{% url 'dashboard-produits' %}"
+                  >
+                    <div
+                      class="card my-card shadow text-center p-3 bg-secondary"
+                    >
+                      <h4>Products <i class="fas fa-box"></i></h4>
+                      <h3>{{ P_count }}</h3>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a
+                    class="text-decoration-none text-white"
+                    href="{% url 'dashboard-types' %}"
+                  >
+                    <div
+                      class="card my-card shadow text-center p-3 bg-secondary"
+                    >
+                      <h4>Types <i class="fas fa-shipping-fast"></i></h4>
+                      <h3>{{ T_count }}</h3>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a
+                    class="text-decoration-none text-white"
+                    href="{% url 'dashboard-Fournisseur' %}"
+                  >
+                    <div
+                      class="card my-card shadow text-center p-3 bg-secondary"
+                    >
+                      <h4>Suppliers <i class="fas fa-shipping-fast"></i></h4>
+                      <h3>{{ F_count }}</h3>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a
+                    class="text-decoration-none text-white"
+                    href="{% url 'dashboard-client' %}"
+                  >
+                    <div
+                      class="card my-card shadow text-center p-3 bg-secondary"
+                    >
+                      <h4>Clients <i class="fas fa-shipping-fast"></i></h4>
+                      <h3>{{ C_count }}</h3>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-2">
+                  <a
+                    class="text-decoration-none text-white"
+                    href="{% url 'dashboard-stock' %}"
+                  >
+                    <div
+                      class="card my-card shadow text-center p-3 bg-secondary"
+                    >
+                      <h4>Stock <i class="fas fa-box"></i></h4>
+                      <h3>{{ S_count }}</h3>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-2">
+                  <a
+                    class="text-decoration-none text-white"
+                    href="{% url 'main-dashboard' %}"
+                  >
+                    <div
+                      class="card my-card shadow text-center p-3 bg-secondary"
+                    >
+                      <h4>Users <i class="fas fa-box"></i></h4>
+                      <h3>{{ U_count }}</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Topside-->
+
+    <!--Table-->
+    <div class="container">
+      <div class="row my-4">
+        <div class="col-md-4">
+          <div
+            class="border p-3"
+            style="border-radius: 10px; background-color: #aaaaaa"
+          >
+            <h4>Add Product entry</h4>
+            <hr />
+            <form action="" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <div>
+                  <label class="col-md-4 form-group" for="inputAddress"
+                    >Product</label
+                  >
+                  {{ form.Produit }}
+                </div>
+
+                <div>
+                  <label class="col-md-4 form-group" for="inputAddress"
+                    >Type</label
+                  >
+                  {{ form.Type }}
+                </div>
+
+                <div>
+                  <label class="col-md-4 form-group" for="inputAddress"
+                    >Quantitie</label
+                  >
+                  {{ form.qte }}
+                </div>
+
+                <div>
+                  <label class="col-md-4 form-group" for="inputAddress"
+                    >PrixHT</label
+                  >
+                  {{ form.PrixHT }}
+                </div>
+
+                <div>
+                  <label class="col-md-4 form-group" for="inputAddress"
+                    >PrixVente</label
+                  >
+                  {{ form.PrixVente }}
+                </div>
+              </div>
+
+              <input
+                type="submit"
+                value="Add"
+                class="btn btn-success btn-block"
+              />
+            </form>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <table class="table bg-secondary">
+            <thead class="bg-info">
+              <tr class="text-white">
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Type</th>
+                <th scope="col">QTE</th>
+                <th scope="col">PrixHT</th>
+                <th scope="col">PrixVente</th>
+                <th scope="col">TotalAchat</th>
+                <th scope="col">TotalVente</th>
+                <th scope="col">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="yellow"
+                    class="bi bi-pencil-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"
+                    />
+                  </svg>
+                </th>
+                <th scope="col">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="red"
+                    class="bi bi-trash3-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+                    />
+                  </svg>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for S in stock %}
+              <tr>
+                <td>{{ S.CodeS }}</td>
+                <td>{{ S.Produit }}</td>
+                <td>{{ S.Type }}</td>
+                <td>{{ S.qte }}</td>
+                <td>{{ S.PrixHT }}</td>
+                <td>{{ S.PrixVente }}</td>
+                <td>{{ S.TotalAchat }}</td>
+                <td>{{ S.TotalVente }}</td>
+                <td class="text-black">
+                  <a href="{% url 'edit-stock' S.CodeS %}">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="yellow"
+                      class="bi bi-pencil-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"
+                      />
+                    </svg>
+                  </a>
+                </td>
+
+                <td class="text-black">
+                  <a href="{% url 'delete-stock' S.CodeS %}">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="red"
+                      class="bi bi-trash3-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+                      />
+                    </svg>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
