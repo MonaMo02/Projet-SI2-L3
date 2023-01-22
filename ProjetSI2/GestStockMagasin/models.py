@@ -72,6 +72,8 @@ class VenteComptoir(models.Model):
     Qte = models.IntegerField(default=0)
     PrixVente = models.FloatField(default= 0)
     MontantPaye = models.FloatField(default=0)
+    def __str__(self):         
+        return str(self.CodeVente)
     @property
     def Montant(self):
         Montant = 0

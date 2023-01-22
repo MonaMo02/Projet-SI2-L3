@@ -80,7 +80,6 @@ def editvente(request, pk):
             return render(request, 'dashboard/edit_vente.html', {"form": form})
 
 
-
 def deletevente(request,pk):
     item = VenteComptoir.objects.get(CodeVente=pk)
     if request.method == 'POST':
@@ -392,7 +391,6 @@ def fournisseur_delete(request,pk):
 
 
 def product_edit(request, pk):
-
     item = Produit.objects.get(CodeP=pk)
     if request.method == 'POST':
         form = ProduitForm(request.POST, instance = item)
