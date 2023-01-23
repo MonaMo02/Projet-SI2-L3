@@ -19,11 +19,17 @@ The frameworks Django and Bootstrap were used to build this app.
 ```
 Python  –m  venv  env_name
 ```
-### Once your environment is created, run the following commande to activate it:
+### Once your environment is created, run the following commande to activate it: 
+(If you are downloading both folders you can jump straight to this step) 
+```
+env_name\Scripts\activate
+```
+
+### Once your environment is created and activated, run the following commande to install Django:
 ```
 pip install django
 ```
-### Once the install is complete access the application folder (the one you downloaded:GestStockMagasin) thenrun the follwing commands and you are ready to use our application: 
+### Once the install is complete access the application folder (the one you downloaded:GestStockMagasin) then run the follwing commands and you are ready to use our application: 
 ```
 Python  manage.py makemigrations
 Python  manage.py migrate
