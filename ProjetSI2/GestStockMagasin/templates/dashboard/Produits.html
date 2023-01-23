@@ -186,6 +186,13 @@
                   >
                   {{ form.Type }}
                 </div>
+
+                <div>
+                  <label class="col-md-4 form-group" for="inputAddress"
+                    >Fournit Par</label
+                  >
+                  {{ form.Fournisseur }}
+                </div>
               </div>
 
               <input
@@ -203,6 +210,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Product</th>
                 <th scope="col">Type</th>
+                <th scope="col">Fournisseur/th></th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
               </tr>
@@ -213,6 +221,7 @@
                 <td class="text-black">{{ p.CodeP }}</td>
                 <td class="text-black">{{ p.DesignationP }}</td>
                 <td class="text-black">{{ p.Type }}</td>
+                <td class="text-black">{{ p.Fournisseur }}</td>
                 <td class="text-black">
                   <a href="{% url 'edit-product' p.CodeP %}">
                     <svg

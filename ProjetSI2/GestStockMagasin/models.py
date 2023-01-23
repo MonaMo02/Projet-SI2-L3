@@ -24,6 +24,7 @@ class Produit (models.Model):
     CodeP = models.AutoField(primary_key=True)
     DesignationP = models.CharField(max_length=100)
     Type = models.ForeignKey(TypeProduit, on_delete=models.CASCADE)
+    Fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
     def __str__(self):         
         return str(self.DesignationP)
 
