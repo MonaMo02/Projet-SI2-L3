@@ -389,7 +389,6 @@ def fournisseur_delete(request,pk):
 
 #les views de modification
 
-
 def product_edit(request, pk):
     item = Produit.objects.get(CodeP=pk)
     if request.method == 'POST':
@@ -413,7 +412,6 @@ def client_edit(request, pk):
             return render(request, 'dashboard/edit_client.html', {"form": form})
 
 def type_edit(request, pk):
-
     item = TypeProduit.objects.get(CodeT=pk)
     if request.method == 'POST':
         form = TypeForm(request.POST, instance = item)
