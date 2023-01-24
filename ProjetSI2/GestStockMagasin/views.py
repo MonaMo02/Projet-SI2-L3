@@ -66,7 +66,7 @@ def afficher_Vente(request):
         'S_count':stock_count,
         'V_count':vente_count,
     }
-    return render(request, 'dashboard/vente.html', contexte)
+    return render(request, 'Vente/vente.html', contexte)
 
 # def editvente(request, pk):
 #     item = VenteComptoir.objects.get(CodeVente=pk)
@@ -90,7 +90,7 @@ def edit_vente(request, pk):
             return redirect('dashboard-vente')
     else:
         form = VentCForm(instance=vente)
-        return render(request, 'dashboard/edit_vente.html', {"form":form})
+        return render(request, 'Vente/edit_vente.html', {"form":form})
 
 
 def deletevente(request,pk):
@@ -100,7 +100,7 @@ def deletevente(request,pk):
         return redirect('dashboard-vente')
     else:
         form = VentCForm(instance=item)
-        return render(request,'dashboard/delete_vente.html',{"form":form})
+        return render(request,'Vente/delete_vente.html',{"form":form})
 
 
 #end vente views
@@ -140,7 +140,7 @@ def afficher_Stock(request):
         'S_count':stock_count,
         'V_count':vente_count,
     }
-    return render(request, 'dashboard/stock.html', contexte)
+    return render(request, 'Stock/stock.html', contexte)
 
 
 
@@ -153,7 +153,7 @@ def editstock(request, pk):
             return redirect("dashboard-stock")
     else: 
             form = StockForm(instance= item)
-            return render(request, 'dashboard/edit_stock.html', {"form": form})
+            return render(request, 'Stock/edit_stock.html', {"form": form})
 
 
 
@@ -164,7 +164,7 @@ def deletestock(request,pk):
         return redirect('dashboard-stock')
     else:
         form = StockForm(instance=item)
-        return render(request,'dashboard/delete_stock.html',{"form":form})
+        return render(request,'Stock/delete_stock.html',{"form":form})
 
 
 #end stock views
@@ -234,7 +234,7 @@ def afficher_Types(request):
         'S_count':stock_count,
         'V_count':vente_count,
     }
-    return render(request, "dashboard/Types.html", contexte)
+    return render(request, "Types/Types.html", contexte)
 
     ########################################################################
 
@@ -275,7 +275,7 @@ def afficher_Fournisseur(request):
         'T_count':type_count,
         'S_count':stock_count,
     }
-    return render(request, "dashboard/Fournisseurs.html", contexte)
+    return render(request, "Fournisseurs/Fournisseurs.html", contexte)
 
 ########################################################################
 
@@ -313,7 +313,7 @@ def afficher_Produits(request):
         'T_count':type_count,
         'S_count':stock_count,
     }
-    return render(request,"dashboard/Produits.html",contexte)
+    return render(request,"Produit/Produits.html",contexte)
 
 ######################################################################
 
@@ -355,7 +355,7 @@ def afficher_Client(request):
         'T_count':type_count,
         'S_count':stock_count,
     } 
-    return render(request, 'dashboard/Clients.html', context)
+    return render(request, 'Client/Clients.html', context)
 
 
 
@@ -368,7 +368,7 @@ def product_delete(request,pk):
         return redirect('dashboard-produits')
     else:
         form = ProduitForm(instance=item)
-        return render(request,'dashboard/delete_prod.html',{"form":form})
+        return render(request,'Produit/delete_prod.html',{"form":form})
 
 def client_delete(request,pk):
     item = Client.objects.get(CodeC=pk)
@@ -377,7 +377,7 @@ def client_delete(request,pk):
         return redirect('dashboard-client')
     else:
         form = ClientForm(instance=item)
-        return render(request,'dashboard/delete_client.html',{"form":form})
+        return render(request,'Client/delete_client.html',{"form":form})
 
 
 def type_delete(request,pk):
@@ -387,7 +387,7 @@ def type_delete(request,pk):
         return redirect('dashboard-types')
     else:
         form = TypeForm(instance=item)
-        return render(request,'dashboard/delete_type.html',{"form":form})
+        return render(request,'Types/delete_type.html',{"form":form})
 
 
 def fournisseur_delete(request,pk):
@@ -397,7 +397,7 @@ def fournisseur_delete(request,pk):
         return redirect('dashboard-Fournisseur')
     else:
         form = FournisseurForm(instance=item)
-        return render(request,'dashboard/delete_fournisseur.html',{"form":form})
+        return render(request,'Fournisseurs/delete_fournisseur.html',{"form":form})
 
 
 #les views de modification
@@ -411,7 +411,7 @@ def product_edit(request, pk):
             return redirect("dashboard-produits")
     else: 
             form = ProduitForm(instance= item)
-            return render(request, 'dashboard/edit_prod.html', {"form": form})
+            return render(request, 'Produit/edit_prod.html', {"form": form})
 
 def client_edit(request, pk):
     item = Client.objects.get(CodeC=pk)
@@ -422,7 +422,7 @@ def client_edit(request, pk):
             return redirect("dashboard-client")
     else: 
             form = ClientForm(instance= item)
-            return render(request, 'dashboard/edit_client.html', {"form": form})
+            return render(request, 'Client/edit_client.html', {"form": form})
 
 def type_edit(request, pk):
     item = TypeProduit.objects.get(CodeT=pk)
@@ -433,7 +433,7 @@ def type_edit(request, pk):
             return redirect("dashboard-types")
     else: 
             form = TypeForm(instance= item)
-            return render(request, 'dashboard/edit_type.html', {"form": form})
+            return render(request, 'Types/edit_type.html', {"form": form})
 
 def fournisseur_edit(request, pk):
 
@@ -445,5 +445,5 @@ def fournisseur_edit(request, pk):
             return redirect("dashboard-Fournisseur")
     else: 
             form = FournisseurForm(instance= item)
-            return render(request, 'dashboard/edit_fournisseur.html', {"form": form})
+            return render(request, 'Fournisseurs/edit_fournisseur.html', {"form": form})
 
