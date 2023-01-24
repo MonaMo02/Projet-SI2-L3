@@ -21,6 +21,6 @@ urlpatterns = [
     path('Stock/editS/<int:pk>/', views.editstock, name="edit-stock"),
     path('Stock/deleteS/<int:pk>/', views.deletestock, name="delete-stock"),
     path('Vente/', views.afficher_Vente, name="dashboard-vente"),
-    path('Vente/editV/<int:pk>/', views.editvente, name="edit-vente"),
+    path('Vente/editV/<int:pk>/', views.edit_vente, name="edit-vente"),
     path('Vente/deleteV/<int:pk>/', views.deletevente, name="delete-vente"),
 ]

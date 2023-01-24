@@ -46,4 +46,4 @@ class StockForm(forms.ModelForm):
 class VentCForm(forms.ModelForm):
     class Meta:
         model = VenteComptoir
-        fields = ['CodeVente','Client', 'Produit','Qte','PrixVente','MontantPaye']
+        fields = ['Client', 'Produit','Qte','PrixVente','MontantPaye']

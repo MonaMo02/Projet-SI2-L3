@@ -68,16 +68,29 @@ def afficher_Vente(request):
     }
     return render(request, 'dashboard/vente.html', contexte)
 
-def editvente(request, pk):
-    item = VenteComptoir.objects.get(CodeVente=pk)
+# def editvente(request, pk):
+#     item = VenteComptoir.objects.get(CodeVente=pk)
+#     if request.method == 'POST':
+#         form = VentCForm(request.POST, instance = item)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("dashboard-vente")
+#     else: 
+#             form = VentCForm(instance= item)
+#             return render(request, 'dashboard/edit_vente.html', {"form": form})
+
+
+
+def edit_vente(request, pk):
+    vente = VenteComptoir.objects.get(CodeVente = pk)
     if request.method == 'POST':
-        form = VentCForm(request.POST, instance = item)
+        form = VentCForm(request.POST, instance= vente)
         if form.is_valid():
             form.save()
-            return redirect("dashboard-vente")
-    else: 
-            form = VentCForm(instance= item)
-            return render(request, 'dashboard/edit_vente.html', {"form": form})
+            return redirect('dashboard-vente')
+    else:
+        form = VentCForm(instance=vente)
+        return render(request, 'dashboard/edit_vente.html', {"form":form})
 
 
 def deletevente(request,pk):

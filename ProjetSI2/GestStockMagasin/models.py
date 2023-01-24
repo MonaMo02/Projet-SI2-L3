@@ -67,7 +67,7 @@ class Stock (models.Model):
 #vente 
 
 class VenteComptoir(models.Model):
-    CodeVente = models.IntegerField(default=0, primary_key=True)
+    CodeVente = models.AutoField(primary_key=True)
     Client = models.ForeignKey(Client, on_delete=models.CASCADE)
     Produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
     Qte = models.IntegerField(default=0)
