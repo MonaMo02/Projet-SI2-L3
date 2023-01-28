@@ -2,34 +2,6 @@ from django.shortcuts import render, redirect
 from .models import TypeProduit,VenteComptoir, Stock, Produit, Fournisseur, Client
 from .forms import ProduitForm, VentCForm, FournisseurForm,StockForm,UserForm ,ClientForm,TypeForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-
-
-
-#login and register views
-
-# def register(request):
-#     form = UserForm()
-#     if request.method == 'POST':
-#         form = UserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#     return render(request, "users/register.html", {'form': form})
-
-# def login(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('uname')
-#         password = request.POST.get('pass')
-#         user = authenticate(request, username=name, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('main-dashboard')
-#         else:
-#             return HttpResponse('Error, user does not exist')
-#     return render(request, 'users/login.html', {})
 
 #Vente views
 
@@ -42,8 +14,6 @@ def afficher_Vente(request):
     fours_count = fours.count()
     types = TypeProduit.objects.all()
     type_count = types.count()
-    users = User.objects.all()
-    user_count = users.count()
     Clients = Client.objects.all()
     client_count = Clients.count()
     stock = Stock.objects.all()
@@ -67,7 +37,6 @@ def afficher_Vente(request):
         'P_count':prod_count,
         'F_count':fours_count,
         'C_count':client_count,
-        'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
         'V_count':vente_count,
@@ -109,8 +78,6 @@ def afficher_Stock(request):
     fours_count = fours.count()
     types = TypeProduit.objects.all()
     type_count = types.count()
-    users = User.objects.all()
-    user_count = users.count()
     Clients = Client.objects.all()
     client_count = Clients.count()
     stock = Stock.objects.all()
@@ -136,7 +103,6 @@ def afficher_Stock(request):
         'P_count':prod_count,
         'F_count':fours_count,
         'C_count':client_count,
-        'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
         'V_count':vente_count,
@@ -184,15 +150,12 @@ def dashboard(request):
     client_count = clients.count()
     types = TypeProduit.objects.all()
     type_count = types.count()
-    users = User.objects.all()
-    user_count = users.count()
     stocks = Stock.objects.all()
     stock_count = stocks.count()
     context ={
         'P_count':prod_count,
         'F_count':fours_count,
         'C_count':client_count,
-        'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
         'V_count':vente_count,
@@ -208,8 +171,6 @@ def afficher_Types(request):
     fours_count = fours.count()
     types = TypeProduit.objects.all()
     type_count = types.count()
-    users = User.objects.all()
-    user_count = users.count()
     Clients = Client.objects.all()
     client_count = Clients.count()
     stock = Stock.objects.all()
@@ -236,7 +197,6 @@ def afficher_Types(request):
         'P_count':prod_count,
         'F_count':fours_count,
         'C_count':client_count,
-        'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
         'V_count':vente_count,
@@ -254,8 +214,6 @@ def afficher_Fournisseur(request):
     fours_count = fours.count()
     types = TypeProduit.objects.all()
     type_count = types.count()
-    users = User.objects.all()
-    user_count = users.count()
     stock = Stock.objects.all()
     stock_count = stock.count()
     #Pour l'affichage des clients
@@ -283,7 +241,6 @@ def afficher_Fournisseur(request):
         'P_count':prod_count,
         'F_count':fours_count,
         'C_count':client_count,
-        'U_count': user_count,
         'V_count':vente_count,
         'T_count':type_count,
         'S_count':stock_count,
@@ -301,8 +258,6 @@ def afficher_Produits(request):
     fours_count = fours.count()
     types = TypeProduit.objects.all()
     type_count = types.count()
-    users = User.objects.all()
-    user_count = users.count()
     stock = Stock.objects.all()
     stock_count = stock.count()
     #Pour l'affichage des clients
@@ -328,7 +283,6 @@ def afficher_Produits(request):
         'P_count':prod_count,
         'F_count':fours_count,
         'C_count':client_count,
-        'U_count': user_count,
         'V_count':vente_count,
         'T_count':type_count,
         'S_count':stock_count,
@@ -346,8 +300,6 @@ def afficher_Client(request):
     type_count = types.count()
     item = VenteComptoir.objects.all()
     vente_count = item.count()
-    users = User.objects.all()
-    user_count = users.count()
     #Pour l'affichage des clients
     Clients = Client.objects.all()
     client_count = Clients.count()
@@ -378,7 +330,6 @@ def afficher_Client(request):
         'F_count':fours_count,
         'V_count':vente_count,
         'C_count':client_count,
-        'U_count': user_count,
         'T_count':type_count,
         'S_count':stock_count,
     } 
