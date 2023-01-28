@@ -40,7 +40,7 @@ class TypeForm(forms.ModelForm):
 class StockForm(forms.ModelForm):
     class Meta:
         model = Stock
-        fields = ['Produit', 'Type', 'qte', 'PrixHT', 'PrixVente']
+        fields = ['produit', 'Type', 'qte', 'PrixHT', 'PrixVente']
 
 
 class VentCForm(forms.ModelForm):

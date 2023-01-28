@@ -48,6 +48,12 @@ def afficher_Vente(request):
     client_count = Clients.count()
     stock = Stock.objects.all()
     stock_count = stock.count()
+
+    if request.method =="GET": 
+        query=request.GET.get('recherche')   
+        if query: 
+            item=VenteComptoir.objects.filter(Client__NomC__contains = query)
+
     if request.method == 'POST':
         form = VentCForm(request.POST)
         if form.is_valid():
@@ -67,17 +73,6 @@ def afficher_Vente(request):
         'V_count':vente_count,
     }
     return render(request, 'Vente/vente.html', contexte)
-
-# def editvente(request, pk):
-#     item = VenteComptoir.objects.get(CodeVente=pk)
-#     if request.method == 'POST':
-#         form = VentCForm(request.POST, instance = item)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("dashboard-vente")
-#     else: 
-#             form = VentCForm(instance= item)
-#             return render(request, 'dashboard/edit_vente.html', {"form": form})
 
 
 
@@ -122,6 +117,12 @@ def afficher_Stock(request):
     stock_count = stock.count()
     item = VenteComptoir.objects.all()
     vente_count = item.count()
+
+    if request.method =="GET": 
+        query=request.GET.get('recherche')   
+        if query: 
+            stock=Stock.objects.filter(produit__DesignationP__contains = query)
+
     if request.method == 'POST':
         form = StockForm(request.POST)
         if form.is_valid():
@@ -213,6 +214,12 @@ def afficher_Types(request):
     client_count = Clients.count()
     stock = Stock.objects.all()
     stock_count = stock.count()
+
+    if request.method =="GET": 
+        query=request.GET.get('recherche')   
+        if query: 
+            types=TypeProduit.objects.filter(DesignationT__contains = query)
+
     if request.method == 'POST':
         form = TypeForm(request.POST)
         if form.is_valid():
@@ -254,6 +261,12 @@ def afficher_Fournisseur(request):
     #Pour l'affichage des clients
     Clients = Client.objects.all()
     client_count = Clients.count()
+
+    if request.method =="GET": 
+        query=request.GET.get('recherche')   
+        if query: 
+            fours=Fournisseur.objects.filter(NomF__contains = query)
+
     if request.method == 'POST':
         form = FournisseurForm(request.POST)
         if form.is_valid():
@@ -295,6 +308,12 @@ def afficher_Produits(request):
     #Pour l'affichage des clients
     Clients = Client.objects.all()
     client_count = Clients.count()
+
+    if request.method =="GET": 
+        query=request.GET.get('recherche')   
+        if query: 
+            Prods=Produit.objects.filter(DesignationP__contains = query)
+    
     if request.method == 'POST':
         form = ProduitForm(request.POST)
         if form.is_valid():
@@ -302,6 +321,7 @@ def afficher_Produits(request):
             return redirect("dashboard-produits")
     else:
         form = ProduitForm()
+        
     contexte = {
         'produits' : Prods,
         'form' : form,
@@ -333,6 +353,13 @@ def afficher_Client(request):
     client_count = Clients.count()
     stock = Stock.objects.all()
     stock_count = stock.count()
+
+    #La recherche: 
+    if request.method =="GET": 
+        query=request.GET.get('recherche')   
+        if query: 
+            Clients=Client.objects.filter(NomC__contains = query)
+
     #Pour l'insertion
     if request.method == 'POST':
         form = ClientForm(request.POST)
@@ -447,3 +474,17 @@ def fournisseur_edit(request, pk):
             form = FournisseurForm(instance= item)
             return render(request, 'Fournisseurs/edit_fournisseur.html', {"form": form})
 
+
+
+# views de la recherche
+
+# def rechercher_produits(request):
+    
+#     if request.method =="GET": 
+#         query=request.GET.get('recherche')   
+#         if query: 
+#             produits=Produit.objects.filter(name__contains = query)
+#             return render(request, "Produit/Produits.html",{"products":produits})
+#         else:
+#             return render(request, "Produit/Produits.html")
+        

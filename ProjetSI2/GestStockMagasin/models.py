@@ -42,7 +42,7 @@ class Client (models.Model):
 
 class Stock (models.Model):
     CodeS = models.AutoField(primary_key= True)
-    Produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
+    produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
     Type = models.ForeignKey(TypeProduit, on_delete=models.CASCADE)
     qte = models.IntegerField(default=0)
     PrixHT = models.IntegerField(default=0)
